@@ -1,0 +1,13 @@
+{
+  "presets": ["latest"],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "server": "./src/server",
+        "client": "./src/client",
+        "npm": "./node_modules"
+      }
+    }]
+  ]
+}

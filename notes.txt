@@ -1,0 +1,13 @@
+Server:
+pack-server, run-server
+
+Client:
+pack-client, sass-client, tsc-client
+
+CV:
+pack-cv, sass-cv, watch-cv
+
+pack-* moves .html files either to dist/ to be served by Node or to static/ to be shown directly.
+sass-* processes .scss files and packs them into a single .css file in static/style/
+tsc-* compiles TypeScript into temporary compiled/ then packs everything into single .js file in static/js.
+watch-* monitors files and runs pack-* as necessary.
