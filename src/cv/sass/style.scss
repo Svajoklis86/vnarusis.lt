@@ -17,6 +17,19 @@
   margin: auto;
 }
 
+div.centered {
+  text-align: center;
+  white-space: nowrap;
+}
+
+div.centered:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -70,6 +83,7 @@ div.page {
   }
 
   & > .name {
+    font-size: 24pt;
     width: 40%;
   }
 
@@ -87,15 +101,6 @@ div.page {
       }
     }
   }
-}
-
-div.centered {
-  @include valign(100%);
-
-  font-size: 24pt;
-  text-align: center;
-  line-height: 1.5em;
-  height: 1.5em;
 }
 
 .text-center {
