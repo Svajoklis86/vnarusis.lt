@@ -1,3 +1,5 @@
 export default {
-    port: 80
+    port: 80,
+    isDevelopment: false,
+    nodeEnv: "production"
 };
