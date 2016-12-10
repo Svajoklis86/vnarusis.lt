@@ -1,0 +1,102 @@
+@import "_helpers.scss";
+@import "_constants.scss";
+
+.body {
+  font-size: 12pt;
+  margin-top: 0.3cm;
+
+  &-column-left, &-column-right {
+    display: inline-block;
+    vertical-align: top;
+
+    border-top: $inner-border;
+    border-bottom: $inner-border;
+
+    &:not(:last-child) {
+
+    }
+  }
+
+  $left-width: 55%;
+
+  &-column-left {
+    border-right: $inner-border;
+    width: $left-width;
+  }
+
+  &-column-right {
+    border-left: $inner-border;
+    margin-left: -1px;
+    width: 100% - $left-width;
+  }
+
+  &-category {
+    font-weight: bold;
+    text-align: center;
+    border-bottom: $inner-border;
+    background-color: $page-darker;
+  }
+
+  &-content {
+    padding-top: 0.25cm;
+    padding-bottom: 0.25cm;
+
+    &:not(:last-child) {
+      border-bottom: $inner-border;
+    }
+  }
+
+  &-description, &-points {
+    display: inline-block;
+  }
+
+  &-description {
+    width: 40%;
+  }
+
+  &-points {
+    vertical-align: top;
+    width: 60%;
+    padding-left: 0.25cm;
+    padding-right: 0.25cm;
+
+    &.without-location {
+      width: 100%;
+    }
+
+    & > p, & > ul {
+      margin: 0cm;
+    }
+
+    & > p {
+      &:not(:first-child) {
+        margin-top: 0.25cm;
+      }
+    }
+
+    & > ul {
+      -webkit-padding-start: 0;
+      -webkit-margin-after: 0;
+      -webkit-margin-before: 0cm;
+      margin-left: 0.5cm;
+
+      &:not(:first-child) {
+        margin-top: 0.25cm;
+      }
+    }
+  }
+
+  &-role, &-location {
+    vertical-align: top;
+    text-align: right;
+    padding-right: 0.25cm;
+  }
+
+  &-role {
+    font-style: italic;
+  }
+
+  &-location {
+    padding-top: 0.25cm;
+  }
+}

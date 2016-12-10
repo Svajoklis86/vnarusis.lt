@@ -1,0 +1,91 @@
+@import "_helpers.scss";
+@import "_constants.scss";
+
+.header {
+  width: 100%;
+  height: 3cm;
+
+  &-photo, &-name, &-contact {
+
+    margin-left: -4px;
+    position: relative;
+
+    border-top: $inner-border;
+    border-bottom: $inner-border;
+
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+
+  &-photo {
+    width: 15%;
+    position: relative;
+    @include centerDiv(right, middle);
+
+    & > img {
+      @include centerElement(right, middle);
+
+      width: auto;
+      height: 80%;
+    }
+  }
+
+  &-name {
+    @include centerDiv(center, middle);
+    font-size: 24pt;
+    width: 45%;
+  }
+
+  &-contact {
+    width: 40%;
+    border: $inner-border;
+    border-right: none;
+
+    $item-count: 4;
+
+    & > .contact-item {
+      width: 100%;
+      height: 100% / $item-count;
+
+      &:not(:last-child) {
+        border-bottom: $inner-border;
+      }
+
+      $iconWidth: 15%;
+
+      & > .contact-icon {
+        width: $iconWidth;
+        height: 100%;
+        float: left;
+
+        @include centerDiv(center, middle);
+
+        background-color: $page-darker;
+        border-right: $inner-border;
+        border-bottom-right-radius: 0.2cm;
+        border-top-right-radius: 0.2cm;
+        padding: 5px;
+
+        & > img {
+          width: auto;
+          height: auto;
+
+          max-height: 100%;
+        }
+      }
+
+      & > .contact-data {
+        width: 100% - $iconWidth;
+        height: 100%;
+        float: left;
+
+        @include centerDiv(center, middle);
+      }
+    }
+  }
+}

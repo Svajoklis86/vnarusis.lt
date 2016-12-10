@@ -1,115 +1,44 @@
-@mixin box-shadow($params) {
-  -webkit-box-shadow: $page-shadow;
-  -moz-box-shadow: $page-shadow;
-  box-shadow: $page-shadow;
-}
+@import "partials/_helpers.scss";
+@import "partials/_constants.scss";
 
-@mixin valign($size) {
-  max-height: $size;
-  max-width: $size;
-  width: auto;
-  height: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-div.centered {
-  text-align: center;
-  white-space: nowrap;
-}
-
-div.centered:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -0.25em;
-}
+@import "partials/_header.scss";
+@import "partials/_body.scss";
 
 * {
   box-sizing: border-box;
 }
-
-$page-shadow: 2px 2px 10px rgba(0, 0, 0, 0.75);
 
 div.page {
   font-family: 'Roboto Slab', serif;
   width: 210mm;
   height: 297mm;
   margin: auto;
-  background-color: #fffef3;
+  background-color: $page-color;
 
   @include box-shadow($page-shadow);
 
   .content {
     padding: 0.5cm;
-  }
-}
-
-.header {
-  width: 100%;
-  height: 4cm;
-  border: 1px solid black;
-
-  & > .photo, & > .name, & > .contact {
-
-    margin-left: -4px;
     position: relative;
 
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-
-    &:first-child {
-      margin-left: 0px;
-    }
-
-    &:not(:last-child) {
-      border-right: 1px solid black;
-    }
+    background-image: url("/img/vnarusis_side.svg");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 80px 220mm;
   }
-
-  & > .photo {
-    width: 20%;
-    position: relative;
-
-    & > img {
-      @include valign(80%);
-    }
-  }
-
-  & > .name {
-    font-size: 24pt;
-    width: 40%;
-  }
-
-  & > .contact {
-    width: 40%;
-
-    $item-count: 4;
-
-    & > .contact-item {
-      width: 100%;
-      height: 100% / $item-count;
-
-      &:not(:last-child) {
-        border-bottom: 1px solid black;
-      }
-    }
-  }
-}
-
-.text-center {
-  margin: auto;
-  vertical-align: middle;
 }
 
 body {
   margin: 15vh 25px;
   background-image: url("/img/cv/background.jpg");
   background-attachment: fixed;
+}
+
+.logo {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  margin: auto;
+  height: 3cm;
+
 }
