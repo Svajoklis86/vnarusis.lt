@@ -13,16 +13,24 @@ import gulpIf from "gulp-if";
 import merge from "merge-stream";
 import rename from "gulp-rename";
 import concat from "gulp-concat";
+import notifier from "node-notifier";
+import plumber from "gulp-plumber";
 
 import { config } from "/src/client/config.js";
 
-const cleanPipe = (callback) => {
+const cleanPipe = (callback, compilationOK) => {
     gutil.log("Cleaning...");
 
-    gulp.src(["./compiled/client/**/*"], { read: false, base: "./compiled/client/" })
+    let cleanTask = gulp.src(["./compiled/client/**/*"], { read: false, base: "./compiled/client/" })
         .pipe(clean());
 
     if (callback) {
+        if (compilationOK) {
+            notifier.notify({
+                "title": "tsc",
+                "message": "Compilation OK!"
+            });
+        }
         callback();
     }
 };
@@ -43,7 +51,7 @@ const doBrowserify = (callback) => {
         .on('error', gutil.log)
         .pipe(gulpIf(config.isDevelopment, sourcemaps.write('./')))
         .pipe(gulp.dest('./static/js/'))
-        .on("end", cleanPipe.bind(null, callback));
+        .on("end", cleanPipe.bind(null, callback, true));
 };
 
 const compile = (callback) => {
@@ -53,6 +61,8 @@ const compile = (callback) => {
         "./src/client/app/**/*.ts",
         "./node_modules/angular2/typings/browser.d.ts"
     ]);
+
+    let failed = false;
 
     merge(source)
         .pipe(typescript({
@@ -66,9 +76,23 @@ const compile = (callback) => {
             "noImplicitAny": true,
             "suppressImplicitAnyIndexErrors": true
         }))
+        .on("error", function () {
+            failed = true;
+            this.emit("end");
+        })
         .pipe(gulp.dest('./compiled/client'))
-        .on("end", doBrowserify.bind(null, callback))
-        .on("error", cleanPipe.bind(null, callback));
+        .on("end", () => {
+            if (!failed) {
+                doBrowserify(callback);
+            } else {
+                callback();
+                notifier.notify({
+                    "title": "tsc",
+                    "message": "Compilation failed!"
+                });
+            }
+        });
+
 };
 
 gulp.task('tsc-client', ["pack-client"], function (callback) {
