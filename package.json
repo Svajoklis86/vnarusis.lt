@@ -27,6 +27,7 @@
     "@angular/router": "~3.2.0",
     "angular-in-memory-web-api": "~0.1.15",
     "angular2": "^2.0.0-beta.21",
+    "brfs": "^1.4.3",
     "core-js": "^2.4.1",
     "express": "^4.14.0",
     "graceful-fs": "^4.1.11",

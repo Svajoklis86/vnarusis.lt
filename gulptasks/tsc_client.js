@@ -1,3 +1,5 @@
+"use strict";
+
 import gulp from "gulp";
 import typescript from "gulp-tsc";
 
@@ -21,25 +23,27 @@ import { config } from "/src/client/config.js";
 const cleanPipe = (callback, compilationOK) => {
     gutil.log("Cleaning...");
 
-    let cleanTask = gulp.src(["./compiled/client/**/*"], { read: false, base: "./compiled/client/" })
-        .pipe(clean());
+     let cleanTask = gulp.src(["./compiled/client/**/*"], { read: false, base: "./compiled/client/" })
+         .pipe(clean())
+         .on("end", () => {
 
-    if (callback) {
-        if (compilationOK) {
-            notifier.notify({
-                "title": "tsc",
-                "message": "Compilation OK!"
-            });
-        }
-        callback();
+         });
+
+    if (compilationOK) {
+        notifier.notify({
+            "title": "tsc",
+            "message": "Compilation OK!"
+        });
     }
+    callback();
 };
 
 const doBrowserify = (callback) => {
     gutil.log("Bundling...");
     const b = browserify({
+        transform: ["brfs"],
         entries: './compiled/client/main.js',
-        debug: true
+        debug: config.isDevelopment
     });
 
     b.bundle()
@@ -58,15 +62,14 @@ const compile = (callback) => {
     gutil.log("Compiling...");
 
     let source = gulp.src([
-        "./src/client/app/**/*.ts",
-        "./node_modules/angular2/typings/browser.d.ts"
+        "./src/client/app/**/*.ts"
     ]);
 
     let failed = false;
 
-    merge(source)
+    let ts = merge(source)
         .pipe(typescript({
-            "target": "es5",
+            "target": "es6",
             "module": "commonjs",
             "moduleResolution": "node",
             "sourceMap": true,
@@ -79,20 +82,26 @@ const compile = (callback) => {
         .on("error", function () {
             failed = true;
             this.emit("end");
-        })
-        .pipe(gulp.dest('./compiled/client'))
+        });
+
+    let html = gulp.src([
+        "./src/client/app/**/*.html",
+        "./src/client/app/**/*.css"
+    ]);
+
+    merge(ts, html)
+    .pipe(gulp.dest("./compiled/client"))
         .on("end", () => {
             if (!failed) {
                 doBrowserify(callback);
             } else {
-                callback();
                 notifier.notify({
                     "title": "tsc",
                     "message": "Compilation failed!"
                 });
+                callback();
             }
         });
-
 };
 
 gulp.task('tsc-client', ["pack-client"], function (callback) {

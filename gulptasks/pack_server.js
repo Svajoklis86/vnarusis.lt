@@ -1,3 +1,5 @@
+"use strict";
+
 import gulp from "gulp";
 import { argv } from "yargs";
 import sourcemaps from "gulp-sourcemaps";
