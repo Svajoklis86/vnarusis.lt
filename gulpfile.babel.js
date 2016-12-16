@@ -9,6 +9,7 @@ import "./gulptasks/tsc_client";
 import "./gulptasks/sass_client";
 import "./gulptasks/pack_client";
 import "./gulptasks/watch_tsc_client";
+import "./gulptasks/tslint_client";
 
 import "./gulptasks/set_configuration";
 

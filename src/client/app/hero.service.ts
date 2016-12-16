@@ -2,28 +2,29 @@ import { Injectable } from "@angular/core";
 import { Hero } from "./hero";
 import { Headers, Http } from "@angular/http";
 
-import 'rxjs/add/operator/toPromise';
+import "rxjs/add/operator/toPromise";
 
 @Injectable()
 export class HeroService {
 
-    private heroesUrl = 'api/heroes';  // URL to web api
+    private heroesUrl = "api/heroes";  // URL to web api
+    private headers = new Headers({"Content-Type": "application/json"});
 
     constructor(private http: Http) { }
 
-    getHeroes() : Promise<Hero[]> {
+    private handleError(error: any): Promise<any> {
+        console.error("An error occurred", error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    }
+
+    getHeroes(): Promise<Hero[]> {
         return this.http.get(this.heroesUrl)
             .toPromise()
             .then(response => response.json().data as Hero[])
             .catch(this.handleError);
     };
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
-    }
-
-    getHeroesSlowly() : Promise<Hero[]> {
+    getHeroesSlowly(): Promise<Hero[]> {
         return new Promise<Hero[]>(resolve => setTimeout(resolve, 2000)).then(() => this.getHeroes());
     };
 
@@ -34,8 +35,6 @@ export class HeroService {
             .then(response => response.json().data as Hero)
             .catch(this.handleError);
     }
-
-    private headers = new Headers({'Content-Type': 'application/json'});
 
     update(hero: Hero): Promise<Hero> {
         const url = `${this.heroesUrl}/${hero.id}`;

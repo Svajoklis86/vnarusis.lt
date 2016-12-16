@@ -23,7 +23,7 @@ import { config } from "/src/client/config.js";
 const cleanPipe = (callback, compilationOK) => {
     gutil.log("Cleaning...");
 
-     let cleanTask = gulp.src(["./compiled/client/**/*"], { read: false, base: "./compiled/client/" })
+     let cleanTask = gulp.src(["./compiled/client/"], { read: false, base: "./compiled/client/" })
          .pipe(clean())
          .on("end", () => {
 
@@ -77,7 +77,9 @@ const compile = (callback) => {
             "experimentalDecorators": true,
             "lib": [ "es2015", "dom", "es6" ],
             "noImplicitAny": true,
-            "suppressImplicitAnyIndexErrors": true
+            "suppressImplicitAnyIndexErrors": true,
+            "noUnusedParameters": true,
+            "noUnusedLocals": true
         }))
         .on("error", function () {
             failed = true;
