@@ -1,0 +1,29 @@
+@mixin box-shadow($params) {
+  -webkit-box-shadow: $page-shadow;
+  -moz-box-shadow: $page-shadow;
+  box-shadow: $page-shadow;
+}
+
+@mixin centerDiv($halign, $valign) {
+  text-align: $halign;
+  white-space: nowrap;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: $valign;
+    margin-right: -0.25em;
+  }
+}
+
+@mixin centerElement($halign, $valign) {
+  text-align: $halign;
+  vertical-align: $valign;
+}
+
+@mixin rotate($degrees) {
+  -ms-transform: rotate($degrees); /* IE 9 */
+  -webkit-transform: rotate($degrees); /* Chrome, Safari, Opera */
+  transform: rotate($degrees);
+}

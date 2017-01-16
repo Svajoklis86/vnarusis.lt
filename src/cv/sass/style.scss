@@ -14,6 +14,7 @@ div.page {
   height: 297mm;
   margin: auto;
   background-color: $page-color;
+  line-height: 1.5em;
 
   @include box-shadow($page-shadow);
 
@@ -32,6 +33,7 @@ body {
   margin: 15vh 25px;
   background-image: url("/img/cv/background.jpg");
   background-attachment: fixed;
+  background-color: #b87222;
 }
 
 .logo {
@@ -41,4 +43,18 @@ body {
   margin: auto;
   height: 3cm;
 
+}
+
+#back-button {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+}
+
+a {
+  color: #a7986c;
+}
+
+ul:not(.browser-default) li, ul li {
+  list-style-type: circle;
 }

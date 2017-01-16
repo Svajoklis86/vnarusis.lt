@@ -1,7 +1,8 @@
 "use strict";
 
 import gulp from "gulp";
+import watch from "gulp-watch";
 
 gulp.task('watch-tsc-client', ['tsc-client'], function() {
-    return gulp.watch('./src/client/app/**/*.ts', ['tsc-client']);
+    return watch('./src/client/**/*', ['tsc-client']);
 });

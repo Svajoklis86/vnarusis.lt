@@ -4,10 +4,12 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { HttpModule }    from "@angular/http";
 
-import { AppComponent }  from "./app.component";
+import { AppComponent }  from "./components/app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
 import { InMemoryWebApiModule } from "angular-in-memory-web-api";
+
+import { LandingComponent } from "./components/landing.component";
 
 import './rxjs-extensions';
 
@@ -21,6 +23,7 @@ import './rxjs-extensions';
     ],
     declarations: [
         AppComponent,
+        LandingComponent
     ],
     providers: [
 
@@ -30,5 +33,4 @@ import './rxjs-extensions';
     ]
 })
 export class AppModule {
-
 }

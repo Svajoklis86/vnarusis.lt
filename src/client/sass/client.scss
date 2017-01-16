@@ -1,0 +1,62 @@
+@import "_helpers.scss";
+@import "_override.scss";
+
+$side-padding: 25px;
+
+#global-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -999;
+}
+
+#nav-mobile {
+  margin-right: $side-padding;
+}
+
+.nav-logo-container {
+  height: 100%;
+}
+
+.nav-logo {
+  width: auto;
+  height: 40%;
+  padding: 0px $side-padding;
+  padding-bottom: 3px;
+
+  @include centerElement(center, middle);
+}
+
+$loader-padding: 25px;
+$loader-size: 64px;
+
+#loader {
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -($loader-size + $loader-padding * 2) / 2;
+  margin-left: -($loader-size + $loader-padding * 2) / 2;
+  width: $loader-size + $loader-padding * 2;
+  height: $loader-size + $loader-padding * 2;
+}
+
+#loader-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -$loader-size / 2;
+  margin-top: -$loader-size / 2;
+}
+
+$spinner-default-color: #000000 !default;
+
+* {
+  color: black;
+}
+
+.body-wrapper {
+  background-color: white;
+  margin: 0 7%;
+  padding: 25px 50px;
+}
